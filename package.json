@@ -1,7 +1,7 @@
 {
-  "name": "rollupexample",
+  "name": "webc_components",
   "version": "1.0.0",
-  "description": "",
+  "description": "Web Components POC",
   "main": "dist/index.js",
   "scripts": {
     "type-check": "tsc --noEmit",
@@ -9,8 +9,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run type-check && rm -rf dist && npm run build:types && rollup -c"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Aditya Padhi",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "7.12.10",
     "@babel/preset-env": "7.12.11",
@@ -25,5 +25,14 @@
     "rollup-plugin-terser": "7.0.2",
     "tslib": "2.0.3",
     "typescript": "4.1.3"
-  }
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aditya-padhi-kbl/web-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aditya-padhi-kbl/web-components/issues"
+  },
+  "homepage": "https://github.com/aditya-padhi-kbl/web-components#readme"
 }
