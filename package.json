@@ -1,5 +1,5 @@
 {
-  "name": "webc_components",
+  "name": "@aditya-padhi-kbl/webc_components",
   "version": "1.0.0",
   "description": "Web Components POC",
   "main": "dist/index.js",
