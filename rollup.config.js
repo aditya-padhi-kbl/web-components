@@ -1,31 +1,39 @@
-// import { DEFAULT_EXTENSIONS } from "@babel/core";
-import { nodeResolve } from '@rollup/plugin-node-resolve';
-import typescript from '@rollup/plugin-typescript';
-import pkg from "./package.json";
-import del from 'rollup-plugin-delete';
-import filesize from 'rollup-plugin-filesize';
-// import babel from "@rollup/plugin-babel"
-import { terser } from "rollup-plugin-terser";
-import path from "path";
-const filesizeConfig = {
-  showGzippedSize: true,
-  showBrotliSize: true,
-  showMinifiedSize: true,
-};
-const config =  {
-    external: ["path"],
-    input: path.resolve('src','index.ts'),
-    output: [
-      
-      {
-        file: pkg.main,
-        format: 'es',
-        name: 'rollupexample'
-        // exports: 'named',
-      },
-    ],
-    plugins:[ del (["dist"]),nodeResolve(), typescript(), terser()]
-    // plugins: [ nodeResolve(), babel({extensions: [...DEFAULT_EXTENSIONS, "ts"]})]
-  };
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import babel from '@rollup/plugin-babel';
+import pkg from './package.json';
 
-  export default config;
+const extensions = [
+  '.js', '.jsx', '.ts', '.tsx',
+];
+
+const name = 'rollupexample';
+
+export default {
+  input: './src/index.ts',
+
+  // Specify here external modules which you don't want to include in your bundle (for instance: 'lodash', 'moment' etc.)
+  // https://rollupjs.org/guide/en/#external
+  external: ["date-fns/format"],
+
+  plugins: [
+    // Allows node_modules resolution
+    resolve({ extensions }),
+
+    // Allow bundling cjs modules. Rollup doesn't understand cjs
+    commonjs(),
+
+    // Compile TypeScript/JavaScript files
+    babel({
+      extensions,
+      babelHelpers: 'runtime',
+      include: ['src/**/*'],
+    }),
+  ],
+
+  output: [{
+    file: pkg.main,
+    format: 'es',
+    name
+  }],
+};
