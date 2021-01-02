@@ -1,3 +1,5 @@
-import getFormattedDate from "./currentDateFormatter";
-export default getFormattedDate;
+import NotificationComponent from "./notificationComponent";
 
+export {
+    NotificationComponent
+}

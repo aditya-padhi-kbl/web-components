@@ -2,19 +2,21 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
 import pkg from './package.json';
-
+import path from 'path';
+import { terser } from 'rollup-plugin-terser';
+import { DEFAULT_EXTENSIONS } from '@babel/core';
 const extensions = [
-  '.js', '.jsx', '.ts', '.tsx',
+  ...DEFAULT_EXTENSIONS, '.ts', '.tsx'
 ];
 
-const name = 'rollupexample';
+console.log(extensions)
 
 export default {
-  input: './src/index.ts',
+  input: path.resolve("src", "index.ts"),
 
   // Specify here external modules which you don't want to include in your bundle (for instance: 'lodash', 'moment' etc.)
   // https://rollupjs.org/guide/en/#external
-  external: ["date-fns/format"],
+  external: ["path"],
 
   plugins: [
     // Allows node_modules resolution
@@ -27,13 +29,18 @@ export default {
     babel({
       extensions,
       babelHelpers: 'runtime',
-      include: ['src/**/*'],
-    }),
+      include: ['src/**/*']
+    })
   ],
 
   output: [{
     file: pkg.main,
     format: 'es',
-    name
+    name: 'rollupexample',
+    plugins: [terser({
+      format: {
+        comments: false
+      }
+    })]
   }],
 };

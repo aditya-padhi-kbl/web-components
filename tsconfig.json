@@ -12,7 +12,8 @@
     "declaration": true,
     "target": "ES5",
     "module": "esnext",
-    "strict": true
+    "strict": true,
+    "experimentalDecorators": true
   },
   "include": [
     "src/**/*"
